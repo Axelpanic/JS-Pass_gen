@@ -10,11 +10,9 @@ Functional little code used to generate a password with all characters. Fun litt
 
 You can use this to generate a darn safe password. Even I couldn't guess these passwords.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+![image](https://user-images.githubusercontent.com/112765530/207182254-e33e813d-debe-4230-bc45-b50321e56972.png)
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+https://axelpanic.github.io/JS-Pass_gen/
 
 ## Credits
 
