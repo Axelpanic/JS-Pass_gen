@@ -37,3 +37,94 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+//function to handle the operations to generate a new password
+function generatePassword() {
+
+  //holds the password to be generated and returned 
+  var result = "";
+
+  //variables to collect input from user prompts
+  var passwordLength = 0;
+  var upperCase;
+  var lowerCase;
+  var numbers;
+  var specialChar;
+
+  //initialize characters
+  passwordLength = 0;
+  pwdCriteria.pwdLength = 0;
+  result = "";
+
+  //check password length
+  while (passwordLength < 8 || passwordLength > 128) {
+    passwordLength = prompt("How many characters do you want your password to be? \nPassword must be between 8 and 128 characters.");
+
+    //if user presses cancel
+    if (passwordLength === null) {
+      return "Your secure password";
+    }
+    else {
+      //checking user enters 
+      if (!isFinite(passwordLength)) {
+        alert("You did not enter a number");
+        return "Your secure password";
+      }
+      else {
+        //check password meets length criteria
+        if (passwordLength < 8 || passwordLength > 128) {
+          alert("Password must be between 8 and 128 characters.");
+          return "Your secure password";
+        }
+        else {
+
+          //call the internal function to show prompts for criteria
+          showPrompts();
+
+          while (pwdCriteria.pwdLength < passwordLength) {
+            if (lowerCase === false && upperCase === false && numbers === false && specialChar === false) {
+              alert("You must select at least one criteria of lowercase, uppercase, numbers or special characters")
+              showPrompts();
+            }
+            else {
+              if (lowerCase === true && pwdCriteria.pwdLength < passwordLength) {
+                var lc = pwdCriteria.pwdLowerCase[Math.floor(Math.random() * 26)]
+                result = result + lc;
+                pwdCriteria.pwdLength++;
+              }
+       
+              if (specialChar === true && pwdCriteria.pwdLength < passwordLength) {
+                var sc = pwdCriteria.pwdCharacter[Math.floor(Math.random() * 32)]
+                result = result + sc;
+                pwdCriteria.pwdLength++;
+              }
+
+              if (upperCase === true && pwdCriteria.pwdLength < passwordLength) {
+                var uc = pwdCriteria.pwdUpperCase[Math.floor(Math.random() * 26)]
+                result = result + uc;
+                pwdCriteria.pwdLength++;
+              }
+
+              if (numbers === true && pwdCriteria.pwdLength < passwordLength) {
+                var num = pwdCriteria.pwdNumber[Math.floor(Math.random() * 10)]
+                result = result + num;
+                pwdCriteria.pwdLength++;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    //return the generated password back to the calling function
+    return result;
+
+    //internal function to prompt the user for criteria
+    function showPrompts() {
+      lowerCase = confirm("Do you want to use lower case letters?");
+      upperCase = confirm("Do you want to use upper case letters?");
+      numbers = confirm("Do you want to use numbers?");
+      specialChar = confirm("Do you want to use any special characters?");
+    }
+  }
+}
